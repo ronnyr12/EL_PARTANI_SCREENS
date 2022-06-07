@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".addTecherForAdmin"
+    android:background="@color/backgroundcolor">
+
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="238dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="36dp"
+        android:fontFamily="sans-serif-black"
+        android:gravity="center"
+        android:text="add a new profession "
+        android:textAllCaps="true"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <EditText
+        android:id="@+id/ETnewProfessionName"
+        android:layout_width="303dp"
+        android:layout_height="58dp"
+        android:background="@drawable/edit_text_bg"
+        android:hint="    ENTER PROFESSION NAME: "
+        android:textColorHint="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.323" />
+
+    <EditText
+        android:id="@+id/ETnewProfessionImg"
+        android:layout_width="310dp"
+        android:layout_height="58dp"
+        android:background="@drawable/edit_text_bg"
+        android:hint="    SELECT PROFESSION IMG:"
+        android:textColorHint="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.534"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.499" />
+
+    <Button
+        android:id="@+id/btn_saveNewProfession"
+        android:layout_width="145dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="132dp"
+        android:layout_marginBottom="196dp"
+        android:backgroundTint="@color/bg_dialog"
+        android:text="save"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+    <Button
+        android:id="@+id/btn_goBackToMainForAdminFromeANP"
+        android:layout_width="145dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="132dp"
+        android:layout_marginBottom="84dp"
+        android:backgroundTint="@color/bg_dialog"
+        android:text="GO BACK HOME"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

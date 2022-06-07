@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".addTecherForAdmin"
+    android:background="@color/backgroundcolor">
+
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="312dp"
+        android:layout_height="59dp"
+        android:layout_marginTop="36dp"
+        android:fontFamily="sans-serif-black"
+        android:gravity="center"
+        android:text="add a new profession: "
+        android:textAllCaps="true"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <AutoCompleteTextView
+        android:id="@+id/ACTnewProfessionName"
+        android:layout_width="306dp"
+        android:layout_height="59dp"
+        android:background="@drawable/edit_text_bg"
+        android:hint="ENTER NEW PROFESSION:"
+        android:completionThreshold="1"
+        android:completionHint="select new profession."
+        android:dropDownAnchor="@id/ACTnewProfessionName"
+        android:popupBackground="@color/bg_dialog"
+        android:padding="16dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.438"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.263"/>
+
+
+    <AutoCompleteTextView
+        android:id="@+id/ATCnewProfessionLevel"
+        android:layout_width="310dp"
+        android:layout_height="58dp"
+        android:background="@drawable/edit_text_bg"
+        android:hint="ENTER THE LEVEL:"
+        android:completionThreshold="1"
+        android:completionHint="select the level."
+        android:dropDownAnchor="@id/ATCnewProfessionLevel"
+        android:popupBackground="@color/DD_BG"
+        android:padding="16dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.455"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.442" />
+
+    <Button
+        android:id="@+id/btn_saveNewProfession"
+        android:layout_width="145dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginBottom="24dp"
+        android:backgroundTint="@color/bg_dialog"
+        android:text="save"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btn_moveToPs"
+        android:layout_width="145dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="232dp"
+        android:layout_marginBottom="24dp"
+        android:backgroundTint="@color/bg_dialog"
+        android:text="NEXT"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="159dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="320dp"
+        android:text="YOUR PROFFESSION:"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.192"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ATCnewProfessionLevel" />
+
+    <GridView
+        android:id="@+id/GVanpS"
+        android:layout_width="411dp"
+        android:layout_height="223dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.809" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

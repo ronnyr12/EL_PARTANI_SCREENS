@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "708299764054",
+    "firebase_url": "https://el-partani-a4d62-default-rtdb.firebaseio.com",
+    "project_id": "el-partani-a4d62",
+    "storage_bucket": "el-partani-a4d62.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:708299764054:android:acc41d06249556ce8926f7",
+        "android_client_info": {
+          "package_name": "com.example.el_partani_screens"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "708299764054-qr8p7hk5294mjbe6nq4hctqqmsh7vedl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAU3wtHI1W_QuOKBDwRShTTl_Rk698Ygbo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "708299764054-qr8p7hk5294mjbe6nq4hctqqmsh7vedl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
