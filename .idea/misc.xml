@@ -3,9 +3,20 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Ronny/Downloads/shalevFinal66/EL_PARTANI_App/app/src/main/res/layout/activity_add_profession_for_admin.xml" value="0.2598958333333333" />
         <entry key="..\:/Users/Ronny/Downloads/shalevFinal66/EL_PARTANI_App/app/src/main/res/layout/activity_add_techer_for_admin.xml" value="0.2598958333333333" />
+        <entry key="..\:/Users/Ronny/Downloads/shalevFinal66/EL_PARTANI_App/app/src/main/res/layout/activity_add_work_hour.xml" value="0.176" />
+        <entry key="..\:/Users/Ronny/Downloads/shalevFinal66/EL_PARTANI_App/app/src/main/res/layout/activity_admin_main_screen.xml" value="0.2598958333333333" />
+        <entry key="..\:/Users/Ronny/Downloads/shalevFinal66/EL_PARTANI_App/app/src/main/res/layout/activity_admin_testing_screen.xml" value="0.2598958333333333" />
         <entry key="..\:/Users/Ronny/Downloads/shalevFinal66/EL_PARTANI_App/app/src/main/res/layout/activity_login_screen.xml" value="0.2598958333333333" />
-        <entry key="..\:/Users/Ronny/Downloads/shalevFinal66/EL_PARTANI_App/app/src/main/res/layout/student_schedule_screen.xml" value="0.2598958333333333" />
+        <entry key="..\:/Users/Ronny/Downloads/shalevFinal66/EL_PARTANI_App/app/src/main/res/layout/activity_main.xml" value="0.2598958333333333" />
+        <entry key="..\:/Users/Ronny/Downloads/shalevFinal66/EL_PARTANI_App/app/src/main/res/layout/activity_profession_adapter.xml" value="0.2598958333333333" />
+        <entry key="..\:/Users/Ronny/Downloads/shalevFinal66/EL_PARTANI_App/app/src/main/res/layout/activity_profession_screen.xml" value="0.2598958333333333" />
+        <entry key="..\:/Users/Ronny/Downloads/shalevFinal66/EL_PARTANI_App/app/src/main/res/layout/activity_signup_screen.xml" value="0.2598958333333333" />
+        <entry key="..\:/Users/Ronny/Downloads/shalevFinal66/EL_PARTANI_App/app/src/main/res/layout/activity_teacher_schedule.xml" value="0.2598958333333333" />
+        <entry key="..\:/Users/Ronny/Downloads/shalevFinal66/EL_PARTANI_App/app/src/main/res/layout/activity_we_trip.xml" value="0.2598958333333333" />
+        <entry key="..\:/Users/Ronny/Downloads/shalevFinal66/EL_PARTANI_App/app/src/main/res/layout/fragment_subjects__edit_.xml" value="0.2598958333333333" />
+        <entry key="..\:/Users/Ronny/Downloads/shalevFinal66/EL_PARTANI_App/app/src/main/res/layout/student_schedule_screen.xml" value="0.264" />
       </map>
     </option>
   </component>

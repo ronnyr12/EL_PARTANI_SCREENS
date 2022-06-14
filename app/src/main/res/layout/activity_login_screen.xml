@@ -64,7 +64,7 @@
         android:background="@drawable/edit_text_bg"
         android:drawableLeft="@drawable/ic_baseline_lock_24"
         android:drawablePadding="20dp"
-        android:hint="password "
+        android:hint="password (use your phone number)"
         android:padding="10dp"
         android:textColor="@color/white"
         android:textColorHint="@color/white"

@@ -1,5 +1,7 @@
 package com.example.el_partani_screens;
 
+import android.widget.ImageButton;
+import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Dialog;
@@ -21,15 +23,33 @@ import java.util.ArrayList;
 public class Teacher_schedule extends AppCompatActivity {
     ListView lsvts;
     Dialog dialogts;
+    Intent intent;
+    TextView Tname;
+    ImageButton btn_calener;
+    String name;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teacher_schedule);
         Slidr.attach(this);
+        dialogts = new Dialog(Teacher_schedule.this);
+        dialogts.setContentView(R.layout.custom_dialog_tss);
 
-
+        intent = getIntent();
+        name = intent.getExtras().getString("name");
+        Tname = findViewById(R.id.Tname);
+        Tname.setText(name);
         lsvts = findViewById(R.id.lvTecherSchedule);
         ArrayList<Teacher_schedule_row> arr = new ArrayList<>();
 
+        btn_calener = findViewById(R.id.btn_calener);
+        btn_calener.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Teacher_schedule.this, AddWorkHour.class);
+                intent.putExtra("name", name);
+                startActivity(intent);
+            }
+        });
         arr.add(new Teacher_schedule_row(R.drawable.teacherpic4,11,"יום ראשון שיעור רביעי:"));
         arr.add(new Teacher_schedule_row(R.drawable.teacherpic1,8,"יום שני שיעור ראשון:"));
         arr.add(new Teacher_schedule_row(R.drawable.teacherpic2,9,"יום שלישי שיעור שני :"));
@@ -39,8 +59,7 @@ public class Teacher_schedule extends AppCompatActivity {
 
         Teacher_scheduleAdapter adapter = new Teacher_scheduleAdapter(this,0,arr);
         lsvts.setAdapter(adapter);
-        dialogts = new Dialog(Teacher_schedule.this);
-        dialogts.setContentView(R.layout.custom_dialog_tss);
+
         if (Build.VERSION.SDK_INT>= Build.VERSION_CODES.LOLLIPOP){
             dialogts.getWindow().setBackgroundDrawable(getDrawable(R.drawable.bg_teacher_schedule));
         }

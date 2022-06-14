@@ -1,5 +1,6 @@
 package com.example.el_partani_screens;
 
+import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Dialog;
@@ -22,13 +23,16 @@ public class studentSchedule extends AppCompatActivity {
     ListView lsvoss;
     FloatingActionButton btn_moveToPS;
     Dialog dialogss;
-
-
+    TextView tv_name_st;
+    String name = "";
+    Intent intent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.student_schedule_screen);
-
+        intent = getIntent();
+        name = intent.getStringExtra("name");
+        tv_name_st = findViewById(R.id.tv_name_st);
         lsvoss = findViewById(R.id.lvStudentSchedule);
         ArrayList<Teacher_schedule_row> arr = new ArrayList<>();
         arr.add(new Teacher_schedule_row(R.drawable.teacherpic4,11,"יום ראשון שיעור רביעי:"));
@@ -78,7 +82,10 @@ public class studentSchedule extends AppCompatActivity {
         btn_moveToPS.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(studentSchedule.this, Profession_screen.class));            }
+                Intent intent = new Intent(studentSchedule.this, Profession_screen.class);
+                intent.putExtra("st_name", name);
+                startActivity(intent);
+            }
         });
 
     }

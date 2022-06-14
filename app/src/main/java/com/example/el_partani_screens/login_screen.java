@@ -13,8 +13,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -42,6 +40,8 @@ public class login_screen extends AppCompatActivity {
     TextView tv_forgot_pass;
     Teacher t;
     DatabaseReference teacherRef;
+    boolean teacher = false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,6 +89,7 @@ public class login_screen extends AppCompatActivity {
 
 
     }
+
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
         // you can set menu header with title icon etc
@@ -132,12 +133,11 @@ public class login_screen extends AppCompatActivity {
         teacherRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot data : snapshot.getChildren())
-                {
-                     String adminName =  data.child("name").getValue().toString();
-                    String adminPhone =  data.child("phone").getValue().toString();
-                    String adminEmail =  data.child("email").getValue().toString();
-                    if(adminName.equals(name) && adminPhone.equals(phone) && adminEmail.equals(email))
+                for (DataSnapshot data : snapshot.getChildren()) {
+                    String adminName = data.child("name").getValue().toString();
+                    String adminPhone = data.child("phone").getValue().toString();
+                    String adminEmail = data.child("email").getValue().toString();
+                    if (adminName.equals(name) && adminPhone.equals(phone) && adminEmail.equals(email))
                         fb_admin.setVisibility(View.VISIBLE);
 
                 }
@@ -191,7 +191,7 @@ public class login_screen extends AppCompatActivity {
         isEmailExists(email, new OnEmailCheckListener() {
             @Override
             public void onSuccess(boolean isRegistered) {
-                if(isRegistered){
+                if (isRegistered) {
                     //The email was registered before
                 } else {
                     //The email not registered before
@@ -228,15 +228,14 @@ public class login_screen extends AppCompatActivity {
     }
 
     private void perForLogin() {
-        if(inputName.getText().toString().trim().length()>0 &&
-                inputPassword.getText().toString().trim().length()>0 &&
-        inputEmail.getText().toString().trim().length()==0){
+        if (inputName.getText().toString().trim().length() > 0 &&
+                inputPassword.getText().toString().trim().length() > 0 &&
+                inputEmail.getText().toString().trim().length() == 0) {
             isAdmin();
             return;
         }
         String email = inputEmail.getText().toString();
         String password = inputPassword.getText().toString();
-
 
 
         if (!email.matches(emailPattern)) {
@@ -273,16 +272,57 @@ public class login_screen extends AppCompatActivity {
                     });
         }
     }
+    private void isTeacher() {
+        final DatabaseReference reference= FirebaseDatabase.getInstance().getReference("csv");
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()){
+
+                    String t_name = snapshot.child("name").getValue().toString();
+                    String t_email = snapshot.child("email").getValue().toString();
+//                    String t_phone = snapshot.child("phone").getValue().toString();
+                    if(t_name.equals(inputName.getText().toString()) &&
+                            t_email.equals(inputEmail.getText().toString()) /* &&
+                           t_phone.equals(inputPassword.getText().toString())*/) {
+                        teacher = true;
+                        Intent intent = new Intent(login_screen.this,
+                                Teacher_schedule.class);
+                        intent.putExtra("name", t_name);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+                    }
+                    else{//is student
+
+
+                    }
+                }
+
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
+    }
+
 
     private void sendUserToNextActivity() {
-        if (FirebaseAuth.getInstance().getCurrentUser().getUid().equals("nBY12GPlOyQ21WRJHCdKwBMKb7E2"))
-            startActivity(new Intent(getApplicationContext(), WeTrip.class));
-        else {
-            Intent intent = new Intent(login_screen.this,
-                    studentSchedule.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
-        }
+        isTeacher();
+
+        /*if (FirebaseAuth.getInstance().getCurrentUser().getUid().equals("nBY12GPlOyQ21WRJHCdKwBMKb7E2"))
+            startActivity(new Intent(getApplicationContext(), WeTrip.class));*/
+        Log.d("tag", "techer:"+teacher);
+        Intent intent = new Intent(login_screen.this,
+                studentSchedule.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.putExtra("name", inputName.getText().toString());
+        startActivity(intent);
+
+
+
+
+
     }
 
 
