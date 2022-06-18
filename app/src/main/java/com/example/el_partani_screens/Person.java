@@ -10,7 +10,9 @@ public class Person {
 
     public Person() {
     }
-
+    public Person(String name) {
+        this.name = name;
+    }
     public Person(String name,  Bitmap bitmap, String phone, String email) {
         this.name = name;
         this.bitmap = bitmap;

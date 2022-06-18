@@ -1,5 +1,6 @@
 package com.example.el_partani_screens;
 
+import android.util.Log;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -16,31 +17,41 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
 public class studentSchedule extends AppCompatActivity {
-    ListView lsvoss;
+    ListView lvStudentSchedule;
     FloatingActionButton btn_moveToPS;
     Dialog dialogss;
     TextView tv_name_st;
     String name = "";
     Intent intent;
+    DatabaseReference  partaniRef;
+    ArrayList<Partni> partaniyot;
+    PartniAdapter adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.student_schedule_screen);
+
         intent = getIntent();
         name = intent.getStringExtra("name");
         tv_name_st = findViewById(R.id.tv_name_st);
-        lsvoss = findViewById(R.id.lvStudentSchedule);
+        tv_name_st.setText(name);
+        lvStudentSchedule = findViewById(R.id.lvStudentSchedule);
         ArrayList<Teacher_schedule_row> arr = new ArrayList<>();
-        arr.add(new Teacher_schedule_row(R.drawable.teacherpic4,11,"יום ראשון שיעור רביעי:"));
-        arr.add(new Teacher_schedule_row(R.drawable.teacherpic1,8,"יום שני שיעור ראשון:"));
-        arr.add(new Teacher_schedule_row(R.drawable.teacherpic6,10,"יום חמישי שיעור שלישי:"));
+
+        retriveData();
 
         Teacher_scheduleAdapter adapter = new Teacher_scheduleAdapter(this,0,arr);
-        lsvoss.setAdapter(adapter);
+
         dialogss = new Dialog(studentSchedule.this);
         dialogss.setContentView(R.layout.custom_dialog_sss);
         if (Build.VERSION.SDK_INT>= Build.VERSION_CODES.LOLLIPOP){
@@ -71,7 +82,7 @@ public class studentSchedule extends AppCompatActivity {
                 dialogss.dismiss();
             }
         });
-        lsvoss.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        lvStudentSchedule.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 dialogss.show();
@@ -83,8 +94,38 @@ public class studentSchedule extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(studentSchedule.this, Profession_screen.class);
-                intent.putExtra("st_name", name);
+                intent.putExtra("name", name);
                 startActivity(intent);
+            }
+        });
+    }
+
+    public void retriveData() {
+        partaniRef = FirebaseDatabase.getInstance().getReference("Partaniyot/");
+
+        partaniRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                partaniyot = new ArrayList<Partni>();
+                for (DataSnapshot data : dataSnapshot.getChildren()) {
+                    Partni prt = data.getValue(Partni.class);
+                    String st_nm = data.child("studentName").getValue().toString();
+                    if(st_nm.equals(name)) {
+                        partaniyot.add(prt);
+                    }
+
+                }
+
+
+                adapter = new PartniAdapter(studentSchedule.this,0,
+                        0,partaniyot);
+                lvStudentSchedule.setAdapter(adapter);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
             }
         });
 

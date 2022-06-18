@@ -76,10 +76,10 @@ public class Signup_screen extends AppCompatActivity{
 
                     String t_name=snapshot.child("name").getValue().toString();
                     String t_email=snapshot.child("email").getValue().toString();
-                    String t_phone=snapshot.child("phone").getValue().toString();
+//                    String t_phone=snapshot.child("phone").getValue().toString();
                     if(t_name.equals(inputName.getText().toString()) &&
-                            t_email.equals(inputEmail.getText().toString()) &&
-                            t_phone.equals(inputPassword.getText().toString()))
+                            t_email.equals(inputEmail.getText().toString() /*&&
+                            t_phone.equals(inputPassword.getText().toString()*/))
                         teacher = true;
                 }
 

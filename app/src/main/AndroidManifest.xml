@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EL_PARTANI_SCREENS">
         <activity
+            android:name=".ParatniSchedule"
+            android:exported="false" />
+        <activity
             android:name=".AddWorkHour"
             android:exported="false" />
         <activity

@@ -35,7 +35,7 @@ public class Teacher_scheduleAdapter extends ArrayAdapter<Teacher_schedule_row> 
         if (arr.size()>0){
             Teacher_schedule_row tsr = arr.get(position);
             ImageView TimgITS = convertView.findViewById(R.id.TimgITS);
-            TextView txvDate = convertView.findViewById(R.id.txvDate);
+            TextView txvDate = convertView.findViewById(R.id.tv_day);
             TextView txvtime = convertView.findViewById(R.id.txvtime);
 
            /*todo-

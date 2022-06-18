@@ -21,7 +21,10 @@ public class Teacher  extends Person{
         super(name, phone, email);
         //this.subject = subject;
     }
-
+    public Teacher(String name) {
+        super(name);
+        //this.subject = subject;
+    }
     public String getSubject() {
         return subject;
     }

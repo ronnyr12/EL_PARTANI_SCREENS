@@ -42,15 +42,15 @@ public class TeacherAdapter extends BaseAdapter {
 
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater layoutInflater =((Activity)context).getLayoutInflater();
-        View view= layoutInflater.inflate(R.layout.activity_teacher_adapter,parent,false);
-        TextView Tname= (TextView)view.findViewById(R.id.Tname);
+        View view= layoutInflater.inflate(R.layout.teacher_row,parent,false);
+        TextView txv_name= (TextView)view.findViewById(R.id.txv_name);
         TextView Tclaas= (TextView)view.findViewById(R.id.Tclaas);
         ImageView Tavatar = (ImageView) view.findViewById(R.id.Tavatar);
         Teacher temp = objects.get(position);
 
-        Tavatar.setImageBitmap(temp.getBitmap());
-        Tname.setText(temp.getName());
-        Tclaas.setText(temp.getSubject());
+        //Tavatar.setImageBitmap(temp.getBitmap());
+        txv_name.setText(temp.getName());
+        //Tclaas.setText(temp.getSubject());
         return view;
     }
 }
