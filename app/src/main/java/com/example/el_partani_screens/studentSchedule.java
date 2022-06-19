@@ -61,9 +61,8 @@ public class studentSchedule extends AppCompatActivity {
         dialogss.setCancelable(false);
 
         Button btn_okey_tss = dialogss.findViewById(R.id.btn_okey_tss);
-        Button btn_cancel_tss = dialogss.findViewById(R.id.btn_cancel_tss);
 
-        btn_okey_tss.setOnClickListener(new View.OnClickListener() {
+        /*btn_okey_tss.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(studentSchedule.this, "you deleted your apoiment in this hour. :)", Toast.LENGTH_SHORT).show();
@@ -81,14 +80,31 @@ public class studentSchedule extends AppCompatActivity {
                 Toast.makeText(studentSchedule.this, "you saved your apoiment in this hour. :(", Toast.LENGTH_SHORT).show();
                 dialogss.dismiss();
             }
-        });
+        });*/
         lvStudentSchedule.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 dialogss.show();
+
             }
         });
+        lvStudentSchedule.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                Partni p = partaniyot.get(position);
+                DatabaseReference current = FirebaseDatabase.getInstance().getReference("Partaniyot/" + p.getKey());
+                current.removeValue();
+                Toast.makeText(studentSchedule.this, "you deleted your apoiment in this hour. :)", Toast.LENGTH_SHORT).show();
+                String message = "your apoinment in this hour has been canceld";// צריך להוסיף את השם של התלמיד
+                String phoneNumber="0504718888"; //צריך לשנות את זה למספר של המורה
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("sms:" + phoneNumber));
+                intent.putExtra("sms_body", message);
+                startActivity(intent);
+                return true;
 
+
+            }
+        });
         btn_moveToPS = findViewById(R.id.btn_moveToPS);
         btn_moveToPS.setOnClickListener(new View.OnClickListener() {
             @Override

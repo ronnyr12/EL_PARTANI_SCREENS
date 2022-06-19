@@ -17,22 +17,24 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class ParatniSchedule extends AppCompatActivity {
+    final int STUDENTS_IN_PARTANI = 1;
     Intent intent;
     String t_name = "", s_name = "", prof_name = "";
     ListView lv_partani;
     TextView tv_teacher_nme, tv_proff;
-    String phone="";
+    String phone = "";
     DatabaseReference meetRef, partaniRef;
     ArrayList<Metting> meetings;
-    ArrayList<Partni> partaniyot;
+    ArrayList<Partni> partaniyot, partnis;
     MeetingAdapter meetingAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,7 +49,7 @@ public class ParatniSchedule extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Log.d("xxx",
-                        meetings.get(position).getDay()+" "+meetings.get(position).getHour());
+                        meetings.get(position).getDay() + " " + meetings.get(position).getHour());
 
                 DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
                 String date = df.format(Calendar.getInstance().getTime());
@@ -55,39 +57,75 @@ public class ParatniSchedule extends AppCompatActivity {
                 Partni p = new Partni(meetings.get(position).getDay(),
                         meetings.get(position).getHour(), t_name, s_name, date, phone);
 
-                partaniRef = FirebaseDatabase.getInstance().getReference("Partaniyot/").push();
-                partaniRef.setValue(p);
+                //before adding check if there is a partani in this hour
+                isAlreadyTaken(STUDENTS_IN_PARTANI, p);
 
-                //add - send sms
-                Intent intent = new Intent(ParatniSchedule.this,
-                        studentSchedule.class);
-                intent.putExtra("name", s_name);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
             }
         });
 
     }
 
+    private void isAlreadyTaken(int amount, Partni partni) {
+        partaniRef = FirebaseDatabase.getInstance().getReference("Students/");
+        partaniRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                partnis = new ArrayList<Partni>();
+                int current_amount = 0;
+                for (DataSnapshot data : dataSnapshot.getChildren()) {
+                    Partni p = data.getValue(Partni.class);
+                    if (p.getDay().equals(partni.getDay()) && p.getHour() == partni.getHour()) {
+                        current_amount++;
+                    }
+                }
+                if (current_amount >= amount)
+                    Toast.makeText(ParatniSchedule.this, "Canr add a new Lesson," +
+                            " it is full", Toast.LENGTH_SHORT).show();
+                else {
+                    addPartaniToDB_AND_Send_SMS(partni);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+    }
+
+    private void addPartaniToDB_AND_Send_SMS(Partni p) {
+        partaniRef = FirebaseDatabase.getInstance().getReference("Partaniyot/").push();
+        p.setKey(partaniRef.getKey());
+        partaniRef.setValue(p);
+
+        //add - send sms
+        Intent intent = new Intent(ParatniSchedule.this,
+                studentSchedule.class);
+        intent.putExtra("name", s_name);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
+
     private void setPhone() {
-        final DatabaseReference reference= FirebaseDatabase.getInstance().getReference("csv");
+        final DatabaseReference reference = FirebaseDatabase.getInstance().getReference("csv");
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()){
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
 
                     String teacher = snapshot.child("name").getValue().toString();
-                    if(teacher.equals(t_name)) {
+                    if (teacher.equals(t_name)) {
                         phone = snapshot.child("phone").getValue().toString();
                         return;
-                    }
-                    else{
+                    } else {
 
                     }
                 }
 
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
             }
@@ -104,17 +142,17 @@ public class ParatniSchedule extends AppCompatActivity {
                 meetings = new ArrayList<Metting>();
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
                     Metting m = data.getValue(Metting.class);
-                    Log.d("xx", "t name:"+t_name);
-                    Log.d("xx", "proff:"+prof_name);
+                    Log.d("xx", "t name:" + t_name);
+                    Log.d("xx", "proff:" + prof_name);
                     if (t_name.equals(m.getKey()))
                         meetings.add(m);
                 }
 
-                for (Metting mt: meetings) {
-                    Log.d("xx", mt.getDay()+" "+mt.getHour());
+                for (Metting mt : meetings) {
+                    Log.d("xx", mt.getDay() + " " + mt.getHour());
                 }
-                meetingAdapter = new MeetingAdapter(ParatniSchedule.this,0,
-                        0,meetings);
+                meetingAdapter = new MeetingAdapter(ParatniSchedule.this, 0,
+                        0, meetings);
                 lv_partani.setAdapter(meetingAdapter);
             }
 

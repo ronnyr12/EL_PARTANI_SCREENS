@@ -16,41 +16,28 @@
         android:padding="20dp"
         android:paddingLeft="23dp"
         android:paddingTop="20dp"
-        android:text="Are you sure you want to remove this hour ?"
+        android:text="Long Press A hour for deleting"
         android:textColor="@color/white"
         android:textSize="25dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.39"
+        app:layout_constraintHorizontal_bias="0.401"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
-    <Button
-        android:id="@+id/btn_cancel_tss"
-        android:layout_width="164dp"
-        android:layout_height="77dp"
-        android:layout_marginStart="32dp"
-        android:backgroundTint="@color/bg_dialog"
-        android:text="cancel"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btn_okey_tss"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.972" />
 
     <Button
         android:id="@+id/btn_okey_tss"
         android:layout_width="164dp"
         android:layout_height="77dp"
-        android:layout_marginEnd="40dp"
+        android:layout_marginEnd="152dp"
         android:backgroundTint="@color/bg_dialog"
-        android:text="yes"
+        android:text="i understand, thnx"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.971" />
+        app:layout_constraintVertical_bias="1.0" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
